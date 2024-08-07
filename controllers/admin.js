@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const fileHelper = require('../../../../../xampp_php7.4/htdocs/app-node/util/file');
+const fileHelper = require('../util/file');
 const {validationResult} = require('express-validator');
 const Product = require('../models/product');
 const User = require("../models/user");
