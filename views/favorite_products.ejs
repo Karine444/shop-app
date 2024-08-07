@@ -1,0 +1,394 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="page" class="site page-category">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head flexitem">
+                <div class="logo">
+                    <img src="../assets/logo.png" alt="mega.am">
+                    <a href="/">mega.am</a>
+                </div>
+                <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+
+    <%- include('includes/body_head.ejs') %>
+
+    <main>
+
+        <div class="single-category">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="column">
+                        <div class="holder">
+                            <div class="section">
+                                <div class="row">
+                                    <div class="cat-head">
+                                        <div class="breadcrumb">
+                                            <ul class="flexitem">
+                                                <li><a href="/">Գլխավոր</a></li>
+                                                <li>Ցանկությունների ցուցակ</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="products main flexwrap">
+                                    <% products.forEach(product => { %>
+                                        <div class="item">
+                                            <div class="media">
+                                                <div class="thumbnail object-cover">
+                                                    <a href="/page-offer/<%= product.id %>">
+                                                        <img src="<%= product.image %>" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="hoverable">
+                                                    <ul>
+                                                        <input type="hidden" class="product-id" value="<%= product.id %>"/>
+                                                        <li class="active favorite"><div class="circle-for"><i class="ri-heart-line"></i></div></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="discount circle flexcenter"><span><%= product.discount %>%</span></div>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="main-links"><a href="/page-offer/<%= product.id %>" ><%= product.title %></a></h3>
+                                                <div class="rating">
+                                                    <div class="stars"></div>
+                                                    <span class="mini-text">(<%= product.numReviews%>)</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span class="current">$<%= product.price %></span>
+                                                </div>
+                                                <div class="mini-text">
+                                                    <p><%= product.stock %> sold</p>
+                                                    <p>Անվճար առաքում</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="banners">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="column">
+                        <div class="banner flexwrap">
+                            <div class="row">
+                                <div class="item">
+                                    <div class="image">
+                                        <img src="../assets/banner/banner1.jpg" />
+                                    </div>
+                                    <div class="text-content flexcol">
+                                        <h4>Brutal Sale!</h4>
+                                        <h3><span>Get the deal in here</span><br>Living Room Chair</h3>
+                                        <a href="#" class="primary-button">Shop Now</a>
+                                    </div>
+                                    <a href="#" class="over-link"></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item get-gray">
+                                    <div class="image">
+                                        <img src="../assets/banner/banner2.jpg" />
+                                    </div>
+                                    <div class="text-content flexcol">
+                                        <h4>Brutal Sale!</h4>
+                                        <h3><span>Discount everyday</span><br>Office outfit</h3>
+                                        <a href="#" class="primary-button">Shop Now</a>
+                                    </div>
+                                    <a href="#" class="over-link"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- banners -->
+                        <div class="product-categories flexwrap">
+                            <div class="row">
+                                <div class="item">
+                                    <div class="image">
+                                        <img src="../assets/banner/procat1.jpg" alt="">
+                                    </div>
+                                    <div class="content mini-links">
+                                        <h4>Beauty</h4>
+                                        <ul class="flexcol">
+                                            <li><a href="#">Makeup</a></li>
+                                            <li><a href="#">Skin Care</a></li>
+                                            <li><a href="#">Hair Care</a></li>
+                                            <li><a href="#">Fragrance</a></li>
+                                            <li><a href="#">Foot & Hand Care</a></li>
+                                        </ul>
+                                        <div class="second-links">
+                                            <a href="/page-category" class="view-all">
+                                                Տեսնել բորոլը
+                                                <i class="ri-arrow-right-line"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item">
+                                    <div class="image">
+                                        <img src="../assets/banner/procat2.jpg" alt="">
+                                    </div>
+                                    <div class="content mini-links">
+                                        <h4>Gatdets</h4>
+                                        <ul class="flexcol">
+                                            <li><a href="#">Camera</a></li>
+                                            <li><a href="#">Cell Phones</a></li>
+                                            <li><a href="#">Computers</a></li>
+                                            <li><a href="#">GPS & Navigation</a></li>
+                                            <li><a href="#">Headphones</a></li>
+                                        </ul>
+                                        <div class="second-links">
+                                            <a href="/page-category" class="view-all">
+                                                Տեսնել բորոլը
+                                                <i class="ri-arrow-right-line"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item">
+                                    <div class="image">
+                                        <img src="../assets/banner/procat3.jpg" alt="">
+                                    </div>
+                                    <div class="content mini-links">
+                                        <h4>Տան դեկոր</h4>
+                                        <ul class="flexcol">
+                                            <li><a href="#">Kitchen</a></li>
+                                            <li><a href="#">Dining Room</a></li>
+                                            <li><a href="#">Pantry</a></li>
+                                            <li><a href="#">Great Room</a></li>
+                                            <li><a href="#">Breakfast Nook</a></li>
+                                        </ul>
+                                        <div class="second-links">
+                                            <a href="/page-category" class="view-all">
+                                                Տեսնել բորոլը
+                                                <i class="ri-arrow-right-line"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+    <footer>
+        <div class="newsletter">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="box">
+                        <div class="content">
+                            <h3>Միացե՛ք մեր տեղեկագրին</h3>
+                            <p>Get E-mail updates about our latest shop and <strong>special offers</strong> </p>
+                        </div>
+                        <form action="" class="search newsletter-search">
+                            <span class="icon-large"><i class="ri-mail-line"></i></span>
+                            <input type="email" placeholder="Your email address" required>
+                            <button type="submit">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="widgets">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="flexwrap">
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Help & Contact</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Your Account</a></li>
+                                    <li><a href="#">Your Orders</a></li>
+                                    <li><a href="#">Shipping Rates</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Assistant</a></li>
+                                    <li><a href="#">Help</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Product Categories</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Beauty</a></li>
+                                    <li><a href="#">Electronics</a></li>
+                                    <li><a href="#">Women's Fashion</a></li>
+                                    <li><a href="#">Men's Fashion</a></li>
+                                    <li><a href="#">Girl's Fashion</a></li>
+                                    <li><a href="#">Boy's Fashion</a></li>
+                                    <li><a href="#">Health & Household</a></li>
+                                    <li><a href="#">Home & Kitchen</a></li>
+                                    <li><a href="#">Pet Supplies</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Payment Info</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Bussiness Card</a></li>
+                                    <li><a href="#">Shop with Points</a></li>
+                                    <li><a href="#">Reload Your Balance</a></li>
+                                    <li><a href="#">Paypal</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>About Us</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Company info</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Investors</a></li>
+                                    <li><a href="#">Careers</a></li>
+                                    <li><a href="#">Policies</a></li>
+                                    <li><a href="#">Customer reviews</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- widgets-->
+
+        <div class="footer-info">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="flexcol">
+                        <div class="logo">
+                            <img src="../assets/logo.png" alt="mega.am">
+                            <a href="/">mega.am</a>
+                        </div>
+                        <div class="socials">
+                            <ul class="flexitem">
+                                <li><a href="#"><i class="ri-twitter-line"></i></a></li>
+                                <li><a href="#"><i class="ri-facebook-line"></i></a></li>
+                                <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                                <li><a href="#"><i class="ri-linkedin-line"></i></a></li>
+                                <li><a href="#"><i class="ri-youtube-line"></i></a></li>
+                            </ul>
+                        </div>
+                        <p class="mini-text">Copyright 2023 .Store. All right reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <nav>
+                        <ul class="flexitem">
+                            <li>
+                                <a href="#">
+                                    <i class="ri-bar-chart-line"></i>
+                                    <span>Trending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-user-6-line"></i>
+                                    <span>Account</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ri-heart-line"></i>
+                                    <span>Wishlist</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="t-search">
+                                    <i class="ri-search-line"></i>
+                                    <span>Search</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0" class="cart-trigger">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <span>Cart</span>
+                                    <div class="fly-item">
+                                        <span class="item-number">0</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-bottom desktop-hide">
+            <div class="container">
+                <div class="wrapper">
+                    <a href="#" class="t-close search-close flexcenter"><i class="ri-close-line"></i></a>
+                    <form action="" class="search newsletter-search">
+                        <span class="icon-large"><i class="ri-search-line"></i></span>
+                        <input type="search" placeholder="Search for products" required>
+                        <button type="submit" style="right: 0!important;">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+<script>
+    const FtoShow = '.filter';
+    const Fpopup = document.querySelector(FtoShow);
+    const Ftrigger = document.querySelector('.filter-trigger');
+
+    Ftrigger.addEventListener('click', () => {
+        setTimeout(() => {
+            if(!Fpopup.classList.contains('show')) {
+                Fpopup.classList.add('show')
+            }
+        }, 250 )
+    })
+
+    // auto close by click outside .filter
+    document.addEventListener('click', (e) => {
+        const isClosest = e.target.closest(FtoShow);
+        if (!isClosest && Fpopup.classList.contains('show')) {
+            Fpopup.classList.remove('show')
+        }
+    })
+
+</script>
+</html>

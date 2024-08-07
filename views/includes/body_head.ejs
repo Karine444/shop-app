@@ -1,0 +1,276 @@
+
+<header>
+    <input type="hidden" name="csrf"  id="user_csrf" value="<%= csrfToken %>">
+    <div class="header-top mobile-hide">
+        <div class="wrapper flexitem">
+            <div class="left">
+                <ul class="flexitem main-links">
+<!--                    <li><a href="#">Blog</a></li>-->
+                    <li><a href="/page-category">Ներկայացված ապրանքներ</a></li>
+                    <% if (isAuthenticated) { %>
+                        <li><a href="/favorite-products">Ցանկությունների ցուցակ</a></li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="right">
+                <input type="hidden" value="<%= isAuthenticated %>" id="isAuthenticated"/>
+                <ul class="flexitem main-links">
+                    <% if (!isAuthenticated) { %>
+                        <li><a href="/login">Մուտք գործել</a></li>
+                    <%  }  else { %>
+                        <li><a href="/orders">Պատվերների հետևում</a></li>
+                        <li>
+                            <form action="/logout" method="post">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit">Դուրս գալ</button>
+                            </form>
+                        </li>
+                    <%  } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-nav">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <a href="#" class="trigger desktop-hide"><span class="i ri-menu-2-line"></span></a>
+                <div class="left flexitem">
+                    <div class="logo">
+                        <a href="/" ><svg width="150" height="85" viewBox="0 0 123 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M107.312 31.119L76.2545 0L61.1889 15.0656L46.1234 0L0.000488281 46.1229L31.1195 77.2419L46.1234 62.1763L61.1889 77.2419L76.2545 62.1763L91.2583 77.2419L122.377 46.1229L107.312 31.119Z" fill="#ff6b6b"/>
+                                <path d="M107.311 31.119L76.254 0L61.1884 15.0656L46.1229 0L0 46.1229L31.119 77.2419L46.1229 62.1763L61.1884 77.2419L76.254 62.1763L91.2578 77.2419L122.377 46.1229L107.311 31.119Z" fill="#ff6b6b"/>
+                                <path d="M38.6517 31.6748H44.147V50.5068H38.9605V39.7015L34.1444 47.0491H34.0827L29.2666 39.7633V50.5068H24.2036V31.6748H29.6988L34.1444 38.9606L38.6517 31.6748Z" fill="white"/>
+                                <path d="M45.5679 31.6748H60.6952V36.1204H50.6926V38.9606H60.6952V43.0975H50.6926V46.0612H60.6952V50.5068H45.5679V31.6748Z" fill="white"/>
+                                <path d="M80.0817 39.5162L75.4509 50.4449C74.4012 50.6919 73.3516 50.8771 72.1167 50.8771C66.251 50.8771 61.8672 46.8637 61.8672 41.1833V41.1215C61.8672 35.6263 66.1893 31.366 71.9932 31.366C75.2657 31.366 77.6119 32.4156 79.5877 34.0827L76.5005 37.7874C75.1422 36.676 73.8455 35.9968 71.9932 35.9968C69.2765 35.9968 67.1772 38.2813 67.1772 41.1215V41.1833C67.1772 44.2087 69.2765 46.3698 72.3019 46.3698C73.5368 46.3698 74.5247 46.1228 75.3274 45.5671V43.2826H71.6227V39.4544H80.0817V39.5162Z" fill="white"/>
+                                <path d="M85.5166 43.0972L87.6159 37.7254L89.7152 43.0972H85.5166ZM90.2092 31.551H85.2079L77.1812 50.5065H82.6764L84.0348 47.1723H91.2588L92.6172 50.5065H98.1742L90.2092 31.551Z" fill="white"/>
+                                <path d="M94.2833 32.7861C94.1599 32.9713 94.0364 33.1566 94.0364 33.3418C94.0364 33.5888 94.0981 33.774 94.2833 33.8975C94.4068 34.0827 94.6538 34.1445 94.9008 34.1445C95.1478 34.1445 95.3947 34.0827 95.5182 33.8975C95.6417 33.7123 95.7035 33.527 95.7035 33.3418C95.7035 33.0948 95.6417 32.9096 95.5182 32.7861C95.3947 32.6009 95.1478 32.5391 94.9008 32.5391C94.6538 32.5391 94.4686 32.6009 94.2833 32.7861ZM96.9383 35.1324H95.6417V34.7619C95.5182 34.9472 95.3947 35.0706 95.2095 35.1324C95.0243 35.1941 94.839 35.2559 94.6538 35.2559H94.5921H94.5303C93.9746 35.2559 93.5424 35.0706 93.2337 34.7002C92.925 34.3297 92.7397 33.8975 92.7397 33.3418C92.7397 32.8479 92.925 32.3539 93.2337 31.9834C93.5424 31.613 93.9746 31.4277 94.5303 31.4277H94.5921H94.6538C94.839 31.4277 95.0243 31.4895 95.2095 31.5512C95.3947 31.613 95.5182 31.7365 95.6417 31.86V31.5512H96.9383V35.1324Z" fill="white"/>
+                                <path d="M99.1 31.9834C99.2853 31.7982 99.4088 31.6747 99.594 31.5512C99.7792 31.4895 99.9644 31.4277 100.211 31.4277C100.458 31.4277 100.705 31.4895 100.891 31.613C101.076 31.7365 101.261 31.9217 101.385 32.1069C101.508 31.8599 101.693 31.7365 101.879 31.613C102.125 31.4895 102.311 31.4277 102.558 31.4277C102.99 31.4277 103.36 31.5512 103.484 31.7982C103.669 32.0452 103.731 32.4157 103.731 32.8479V35.1324H102.434V33.4036V33.2801C102.434 33.2183 102.434 33.1566 102.434 33.0948C102.434 32.9096 102.372 32.7861 102.311 32.6626C102.249 32.5391 102.125 32.4774 101.94 32.4774C101.693 32.4774 101.57 32.5391 101.446 32.7244C101.385 32.8479 101.323 33.0331 101.323 33.2183C101.323 33.2801 101.323 33.2801 101.323 33.3418V33.4653V35.1941H100.026V33.4036V33.2801C100.026 33.2183 100.026 33.1566 100.026 33.0948C100.026 32.9096 99.9644 32.7861 99.9027 32.6626C99.841 32.5391 99.6557 32.4774 99.4705 32.4774C99.2853 32.4774 99.1 32.5391 99.0383 32.6626C98.9765 32.7861 98.9148 32.9713 98.9148 33.0948C98.9148 33.1566 98.9148 33.2183 98.9148 33.2801V33.4653V35.1941H97.6182V31.5512H98.9148V31.9834H99.1Z" fill="white"/>
+                            </svg></a>
+                    </div>
+                    <nav class="mobile-hide">
+                        <ul class="flexitem second-links">
+                            <li><a href="/">Գլխավոր էջ</a></li>
+                            <li><a href="/page-category">Խանութ</a></li>
+                            <li class="has-child">
+                                <a href="#">Կանյաք
+                                    <div class="icon-small"><i class="ri-arrow-down-s-line"></i></div>
+                                </a>
+                                <div class="mega">
+                                    <div class="container">
+                                        <div class="wrapper">
+                                            <% womenCategories.forEach(category => { %>
+                                                <div class="flexcol">
+                                                    <div class="row">
+                                                        <h4><%= category.title %></h4>
+                                                        <ul>
+                                                            <% category.subcategories.forEach(subcategory => { %>
+                                                                <li><a href="/page-category?subcategory=<%= subcategory.title %>"><%= subcategory.title %></a></li>
+                                                            <% }); %>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            <% }); %>
+                                            <div class="flexcol products">
+                                                <div class="row">
+                                                    <div class="media">
+                                                        <div class="thumbnail object-cover">
+                                                            <a href="#">
+                                                                <img src="../assets/products/apparel4.jpg" alt="">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-content">
+                                                        <h4>Ամենապահանջված</h4>
+                                                        <a href="/page-category" class="primary-button">Պատվիրել հիմա</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="/page-category?subcategory=Տղամարդիկ">Տղամարդիկ</a></li>
+                            <li>
+                                <a href="/page-category?subcategory=Սպորտ">Սպորտ
+                                    <div class="fly-item"><span>Նոր!</span></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/contact-us">Կապ մեզ հետ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="right">
+                    <ul class="flexitem second-links">
+                        <% if (isAuthenticated) { %>
+                            <li class="mobile-hide"><a href="/favorite-products">
+                                    <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                    <div class="fly-item"><span class="item-number count-of-favorite"><%= countOfFavoriteProducts %></span></div>
+                                </a></li>
+                            <% if(!fromCartPage) { %>
+                                <li class="iscart">
+                                    <a href="#">
+                                    <span class="icon-large">
+                                        <i class="ri-shopping-cart-line"></i>
+                                        <div class="fly-item"><span class="item-number"><%= cartData.items.length ?? 0 %> </span></div>
+                                    </span>
+                                        <span class="icon-text">
+                                        <span class="mini-text">Ընդհանուր</span>
+                                        <span class="cart-total">$<%= cartData.totalPrice.toFixed(2) %></span>
+                                    </span>
+                                    </a>
+                                    <% if (isAuthenticated && cartData.items.length) { %>
+                                        <div class="mini-cart">
+                                            <div class="content">
+                                                <div class="cart-head">
+                                                    <%= cartData.items.length %> ապրանք զամբյուղում
+                                                </div>
+                                                <div class="cart-body">
+                                                    <ul class="products mini">
+                                                        <% cartData.items.forEach(item => { %>
+                                                            <li class="item">
+                                                                <div class="thumbnail object-cover">
+                                                                    <a href="/page-offer/<%= item.productId %>" ><img src="<%= item.productImage %>" alt=""></a>
+                                                                </div>
+                                                                <div class="item-content">
+                                                                    <p><a href="/page-offer/<%= item.productId %>" ><%= item.productName %></a></p>
+                                                                    <div style="display:flex;  flex-direction: row;">
+                                                                         <span class="price">
+                                                                        <span>$<%= item.pricePerItem.toFixed(2) %></span>
+                                                                        <span class="fly-item"><span><%= item.quantity %>x</span></span>
+                                                                     </span>
+                                                                        <% if (item.size) { %>
+                                                                            <p style="margin-left: 55px; margin-top:2px"><b>Չափսը:</b> <span><%= item.size %></span></p>
+                                                                        <% } %>
+                                                                    </div>
+                                                                </div>
+                                                                <form action="/cart-delete-item" method="POST">
+                                                                    <input type="hidden" value="<%= item.productId %>" name="productId">
+                                                                    <input type="hidden" value="<%= item.size %>" name="size">
+                                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                                    <input type="hidden" name="returnUrl" value="<%= url %>">
+                                                                     <button class="item-remove">
+                                                                         <i class="ri-close-line"></i>
+                                                                     </button>
+                                                                </form>
+                                                            </li>
+                                                        <% }); %>
+                                                    </ul>
+                                                </div>
+                                                <div class="cart-footer">
+                                                    <div class="subtotal">
+                                                        <p>Ենթագումար</p>
+                                                        <p><strong>$<%= cartData.totalPrice.toFixed(2) %></strong></p>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a href="/cart" class="primary-button"> Գրանցել պատվերը</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <%  } %>
+                                </li>
+                            <% } %>
+                        <%  } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-main mobile-hide">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <div class="left">
+                    <div class="dpt-cat">
+                        <div class="dpt-head">
+                            <div class="main-text">Բոլոր բաժինները</div>
+                            <div class="mini-text mobile-hide">Ընդհանուր 53 ապրանք</div>
+                            <a href="#" class="dpt-trigger mobile-hide">
+                                <i class="ri-menu-3-line ri-xl"></i>
+                            </a>
+                        </div>
+                        <div class="dpt-menu">
+                            <ul class="second-links">
+                                <% allCategories.forEach(category => { %>
+                                    <li class="has-child  <%= category.description %>">
+                                        <a href="#">
+                                            <div class="icon-large"><i class="ri-bear-smile-line"></i></div>
+                                            <%= category.title %>
+                                            <% if (category.subcategories && category.subcategories.length > 0) {%>
+                                                <div class="icon-small"><i class="ri-arrow-right-s-line"></i></div>
+                                            <% }; %>
+                                        </a>
+                                        <% if (category.subcategories && category.subcategories.length > 0) { %>
+                                            <% if (category.description !== 'homekit') { %>
+                                                <ul>
+                                                    <% category.subcategories.forEach(subcategory => { %>
+                                                        <li><a href="/page-category?subcategory=<%= subcategory.title %>"><%= subcategory.title %></a></li>
+                                                    <% }); %>
+                                                </ul>
+                                            <% } else { %>
+                                                <div class="mega">
+                                                    <% homeCategories.forEach(category => { %>
+                                                        <% let items = Object.values(category.items); %>
+                                                        <% let halfLength = Math.ceil(items.length / 2); %>
+                                                        <% for (let i = 0; i < halfLength; i++) { %>
+                                                            <div class="flexcol">
+                                                                <% let index1 = i * 2; %>
+                                                                <% let index2 = index1 + 1; %>
+                                                                <% if (index1 < items.length) { %>
+                                                                    <% let item1 = items[index1][0]; %>
+                                                                    <div class="row">
+                                                                        <h4><a href="#"><%= item1.description %></a></h4>
+                                                                        <ul>
+                                                                            <% items[index1].forEach(item1 => { %>
+                                                                                <li><a href="/page-category?subcategory=<%= item1.title %>"><%= item1.title %></a></li>
+                                                                            <% }) %>
+                                                                        </ul>
+                                                                    </div>
+                                                                <% } %>
+                                                                <% if (index2 < items.length) { %>
+                                                                    <% let item2 = items[index2][0]; %>
+                                                                    <div class="row">
+                                                                        <h4><a href="#"><%= item2.description %></a></h4>
+                                                                        <ul>
+                                                                            <% items[index2].forEach(item1 => { %>
+                                                                                <li><a href="/page-category?subcategory=<%= item2.title %>"><%= item1.title %></a></li>
+                                                                            <% }) %>
+                                                                        </ul>
+                                                                    </div>
+                                                                <% } %>
+                                                            </div>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </div>
+                                            <% } %>
+                                        <% }; %>
+                                    </li>
+                                <% }); %>
+                                <li>
+                                    <a href="#">
+                                        <div class="icon-large"><i class="ri-shield-star-line"></i></div>
+                                        Բեսթսելլեր
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="search-box">
+                        <form action="/search" class="search" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <span class="icon-large"><i class="ri-search-line"></i></span>
+                            <!-- Set the value of the search input field if searchQuery exists -->
+                            <input type="search" placeholder="Ապրանքի որոնում" name="search" <% if (typeof searchQuery !== 'undefined') { %> value="<%= searchQuery %>" <% } %>>
+                            <button type="submit">Որոնել</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

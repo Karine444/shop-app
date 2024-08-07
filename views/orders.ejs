@@ -1,0 +1,118 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/order.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div id="page" class="site page-cart">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head flexitem">
+                <div class="logo"><a href="/public"><span class="circle"></span>Shop</a></div>
+                <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+
+    <%- include('includes/body_head.ejs') %>
+    <div class="breadcrumb" style="margin-left: 96px;">
+        <ul class="flexitem">
+            <li><a href="/">Գլխավոր էջ</a></li>
+            <li>Պատվերներ</li>
+        </ul>
+    </div>
+    <main>
+        <div class="container py-2 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-5 col-lg-8 col-xl-12">
+                    <div class="card card-stepper" style="border-radius: 16px;">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                            <% orders.forEach((order, index) => { %>
+                                <div class="accordion-item<%= index === 0 ? ' show' : '' %>">
+                                    <h2 class="accordion-header" id="flush-heading_<%= index %>">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_<%= index %>" aria-expanded="<%= index === 0 ? 'true' : 'false' %>" aria-controls="flush-collapseOne">
+                                            <div class="d-flex justify-content-between align-items-center flex-row w-100" style="padding: 10px">
+                                                <p class="text-muted mb-2"> Պատվերի համարը <span class="fw-bold text-body"><%= order.orderNumber %></span></p>
+                                                <p class="text-muted mb-0"> Պատվերը կատարվել է <span class="fw-bold text-body"><%= order.createdAt.toLocaleDateString('hy-AM', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></span> </p>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapse_<%= index %>" class="accordion-collapse collapse<%= index === 0 ? ' show' : '' %>" aria-labelledby="flush-heading_<%= index %>" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="card-body p-4">
+                                                <div class="flex-fill">
+                                                    <h5 class="bold">Առաքման ինֆորմացիան</h5>
+                                                    <div class="d-flex flex-row justify-content-between" style="border-bottom: 1px dashed gray; border-top: 1px dashed gray;padding: 5px; margin-bottom: 50px;">
+                                                        <div class="d-flex justify-content-start flex-column" style="width: 70%">
+                                                            <p class="text-muted"><b>Անուն Ազգանուն</b> <%= order.firstName %> <%= order.lastName %> <span class="small text-muted"></span></p>
+                                                            <p class="text-muted"><b>Էլ Հասցե</b> <%= order.user.email %> <span class="small text-muted"></span></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-start flex-column" style="width: 70%">
+                                                            <p class="text-muted"><b>Հեռախոսահամար</b> <%= order.phone %> <span class="small text-muted"></span></p>
+                                                            <p class="text-muted"><b>Հասցե</b> <%= order.address %> <span class="small text-muted"></span></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between  flex-column" style="width: 70%">
+                                                            <p class="text-muted"><b>Երկիր</b> <%= order.country %> <span class="small text-muted"></span></p>
+                                                            <p class="text-muted"><b>Քաղաք</b> <%= order.city %> <span class="small text-muted"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% order.products.forEach((product, index) => { %>
+                                                    <% const totalPrice = product.product.price * product.quantity; %>
+                                                    <div class="d-flex flex-row mb-4 pb-2" style="border-bottom: 1px solid gray;">
+                                                        <div class="flex-fill">
+                                                            <h5 class="bold"><%= product.product.title %></h5>
+                                                            <div class="d-flex justify-content-between align-items-center flex-row" style="width: 63%">
+                                                                <p class="text-muted"> <b>Քանակը</b>: <%= product.quantity %> Հատ</p>
+                                                                <p class="text-muted"> <b>Չափսը</b>: <%= product.size %></p>
+                                                            </div>
+                                                            <h4 class="mb-3"><b>Արժեքը</b> $<%= totalPrice %> <span class="small text-muted"></span></h4>
+                                                            <p class="text-muted">Կարգավիճակը թարմացված է: <span class="text-body"><%= order.updatedAt.toLocaleDateString('hy-AM', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></span></p>
+                                                        </div>
+                                                        <div style="width: auto; height: 175px; overflow: hidden;">
+                                                            <img class="align-self-center img-fluid" src="<%= product.product.image %>" style="width: 100%; height: 100%;" alt="Product Image">
+                                                        </div>
+                                                    </div>
+                                                <% }) %>
+                                                <p>Զեղչ $15</p>
+                                                <p>Առաքում $3</p>
+                                                <h3>Ընդհանուր արժեքը $<%= order.amount %></h3>
+                                                <div class="card-body p-4">
+                                                    <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+                                                        <li class="step0 <%= order.status >= 1 ? 'active' : '' %>" id="step1"><span style="margin-left: 22px; margin-top: 12px;">Պատվերը կատարված ա</span></li>
+                                                        <li class="step0 <%= order.status >= 2 ? 'active' : '' %> <%= order.status >= 2 ? 'active-line' : '' %> text-center" id="step2"><span>Ճանապարին է</span></li>
+                                                        <li class="step0 <%= order.status >= 3 ? 'active' : '' %> <%= order.status >= 3 ? 'active-line' : '' %> text-muted text-end" id="step3"><span style="margin-right: 22px;">Առաքված է</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+</html>

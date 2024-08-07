@@ -1,0 +1,230 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+<div id="page" class="site page-cart">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head flexitem">
+                <div class="logo"><a href="/public"><span class="circle"></span>Shop</a></div>
+                <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+
+    <%- include('includes/body_head.ejs') %>
+
+    <main>
+        <div class="single-cart">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="breadcrumb">
+                        <ul class="flexitem">
+                            <li><a href="/">Գլխավոր էջ</a></li>
+                            <li>Քարտ</li>
+                        </ul>
+                    </div>
+                    <div class="page-title">
+                        <h1>Գնումների զամբյուղ</h1>
+                    </div>
+                    <div class="products one cart">
+                        <div class="flexwrap">
+                            <div class="form-cart">
+                                <div class="item">
+                                    <table id="cart-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Ապրանք</th>
+                                                <th>Արժեք</th>
+                                                <th>Քանակ</th>
+                                                <th>Ընդհանուր գումար</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <% cartData.items.forEach(item => { %>
+                                            <tr>
+                                                <td class="flexitem">
+                                                    <div class="thumbnail object-cover">
+                                                        <a href="#"><img src="<%= item.productImage %>" alt=""></a>
+                                                    </div>
+                                                    <div class="content">
+                                                        <strong><a href="#"><%= item.productName %></a></strong>
+                                                        <p>Չափս: <%= item.size %></p>
+                                                    </div>
+                                                </td>
+                                                <td>$<span class="price-per-item"><%= item.pricePerItem.toFixed(3) %></span></td>
+                                                <td>
+                                                    <div class="qty-control flexitem">
+                                                        <button class="minus">-</button>
+                                                        <input type="hidden" value="<%= csrfToken %>" id="csrfToken" />
+                                                        <input type="hidden" value="<%= cartData.userId %>" id="userId" />
+                                                        <input type="hidden" value="<%= item.productId %>" id="prodId" />
+                                                        <input type="hidden" value="<%= item.size ?? '' %>" id="prodSize" />
+                                                        <input type="text" value="<%= item.quantity %>" min="1">
+                                                        <button class="plus">+</button>
+                                                    </div>
+                                                </td>
+                                                <td>$<span class="total-price"><%= item.totalItemPrice.toFixed(3) %></span></td>
+                                                <td>
+                                                    <form action="/cart-delete-item" method="POST">
+                                                        <input type="hidden" value="<%= item.productId %>" name="productId">
+                                                        <input type="hidden" value="<%= item.size %>" name="size">
+                                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                        <input type="hidden" name="returnUrl" value="<%= url %>">
+                                                        <button class="item-remove">
+                                                            <i class="ri-close-line"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="cart-summary styled">
+                                <div class="item">
+<!--                                    <div class="coupon">-->
+<!--                                        <input type="text" placeholder="Մուտքագրեք կուպոնը">-->
+<!--                                        <button>Հաստատել</button>-->
+<!--                                    </div>-->
+                                    <div class="shipping-rate collapse">
+                                        <div class="has-child expand">
+                                            <a href="#" class="icon-small">Հաշվարկեք առաքման ծախսերը և հարկերը</a>
+                                            <div class="content">
+                                                <div class="countries">
+                                                    <form action="">
+                                                        <label for="country">երկիր</label>
+                                                        <select name="country" id="country">
+                                                            <option value="1" selected="selected">Հայաստան</option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart-total">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <th>Ընհանուր Գումար</th>
+                                                <td>$<%= cartData.totalPrice.toFixed(2) %></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Զեղչ</th>
+                                                <td>-$15.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Առաքում <span class="mini-text">(միջնորդավճար)</span></th>
+                                                <td>$3</td>
+                                            </tr>
+                                            <tr class="grand-total">
+                                                <th>Ընդհանուր</th>
+                                                <td><strong>$<%= cartData.totalPrice.toFixed(2) - 15 + 3 %></strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <a href="/checkout" class="secondary-button">Գրանցել պատվերը</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+<script>
+    // const FtoShow = '.filter';
+    // const Fpopup = document.querySelector(FtoShow);
+    // const Ftrigger = document.querySelector('.filter-trigger');
+    //
+    // Ftrigger.addEventListener('click', () => {
+    //     setTimeout(() => {
+    //         if(!Fpopup.classList.contains('show')) {
+    //             Fpopup.classList.add('show')
+    //         }
+    //     }, 250 )
+    // })
+    //
+    // // auto close by click outside .filter
+    // document.addEventListener('click', (e) => {
+    //     const isClosest = e.target.closest(FtoShow);
+    //     if (!isClosest && Fpopup.classList.contains('show')) {
+    //         Fpopup.classList.remove('show')
+    //     }
+    // })
+    $('.qty-control .minus').on('click', function() {
+        updateQuantity($(this), -1);
+    });
+
+    $('.qty-control .plus').on('click', function() {
+        updateQuantity($(this), 1);
+    });
+
+    function updateQuantity(button, change) {
+        let qtyControl = button.closest('.qty-control');
+        let input = qtyControl.find('input[type="text"]');
+        let prodId = qtyControl.find('#prodId').val();
+        let userId = qtyControl.find('#userId').val();
+        let prodSize = qtyControl.find('#prodSize').val();
+        let minValue = parseInt(input.attr('min'));
+        let value = parseInt(input.val());
+
+        if (value + change >= minValue) {
+            let quantity = value + change;
+            input.val(quantity);
+
+            // Calculate total price
+            let pricePerItem = parseFloat(qtyControl.closest('tr').find('.price-per-item').text().replace('$', ''));
+            let totalPrice = pricePerItem * quantity;
+            qtyControl.closest('tr').find('.total-price').text(+totalPrice.toFixed(3));
+
+            // Update quantity on the server
+            updateQuantityOnServer(userId, prodId, prodSize, quantity);
+        }
+    }
+
+    function updateQuantityOnServer(userId, prodId, prodSize, quantity) {
+        let csrf = $('#csrfToken').val();
+        const formData = {
+            userId,
+            prodId,
+            prodSize,
+            quantity
+        };
+        fetch('/updateQuantity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf
+            },
+            body: JSON.stringify(formData)
+        }).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.error('Error:', error);
+            alert("Error occurred during backup");
+        });
+    }
+
+</script>
+</html>

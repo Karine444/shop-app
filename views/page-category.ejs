@@ -1,0 +1,337 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="page" class="site page-category">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head flexitem">
+                <div class="logo">
+                    <img src="../assets/logo.png" alt="mega.am">
+                    <a href="/">mega.am</a>
+                </div>
+                <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+
+    <%- include('includes/body_head.ejs') %>
+    <main>
+
+        <div class="single-category">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="column">
+                        <div class="holder">
+                            <div class="row sidebar">
+                                <div class="filter">
+                                    <div class="filter-block">
+                                        <h4>Կատեգորիաներ</h4>
+                                        <i class="ri-search-line" style=" position: absolute;top: 50px;left: 12px;"></i>
+                                        <input type="search" id="mySearch" onkeyup="myFunction()" placeholder="Որոնել կատեգորիան" title="Type in a name">
+                                        <ul id="categories-items">
+                                            <% categories.forEach(category => { %>
+                                                <li>
+                                                    <input name="checkbox" type="checkbox"  value="<%= category.title %>" id="<%= category.title.toLowerCase() %>">
+                                                    <label for="<%= category.title.toLowerCase() %>">
+                                                        <span class="checked"></span>
+                                                        <span class="categories-title"><%= category.title %></span>
+                                                    </label>
+                                                    <span class="count"><%= category.productCount %></span>
+                                                </li>
+                                            <% }); %>
+                                        </ul>
+                                    </div>
+                                    <div class="filter-block">
+                                        <h4>Ապրանքանիշեր</h4>
+                                        <ul>
+                                            <li>
+                                                <input name="checkbox" type="checkbox" id="nike">
+                                                <label for="nike">
+                                                    <span class="checked"></span>
+                                                    <span>Nike</span>
+                                                </label>
+                                                <span class="count">9</span>
+                                            </li>
+                                            <li>
+                                                <input name="checkbox" type="checkbox" id="louisvuitton">
+                                                <label for="louisvuitton">
+                                                    <span class="checked"></span>
+                                                    <span>Louis Vuitton</span>
+                                                </label>
+                                                <span class="count">7</span>
+                                            </li>
+                                            <li>
+                                                <input name="checkbox" type="checkbox" id="hermes">
+                                                <label for="hermes">
+                                                    <span class="checked"></span>
+                                                    <span>Hermes</span>
+                                                </label>
+                                                <span class="count">2</span>
+                                            </li>
+                                            <li>
+                                                <input name="checkbox" type="checkbox" id="gucci">
+                                                <label for="gucci">
+                                                    <span class="checked"></span>
+                                                    <span>Gucci</span>
+                                                </label>
+                                                <span class="count">6</span>
+                                            </li>
+                                            <li>
+                                                <input name="checkbox" type="checkbox" id="zara">
+                                                <label for="zara">
+                                                    <span class="checked"></span>
+                                                    <span>Zara</span>
+                                                </label>
+                                                <span class="count">5</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="filter-block pricing" style="margin-bottom: 55px">
+                                        <h4>Գին</h4>
+                                        <div class="byprice">
+                                            <div class="price-field">
+                                                <input type="range" min="10" max="10000" value="10" id="lower">
+                                                <input type="range" min="10" max="10000" value="500" id="upper">
+                                            </div>
+                                            <div class="price-wrap">
+                                                <div class="price-container">
+                                                    <div class="price-wrap-1">
+                                                        <label for="one">$</label>
+                                                        <input id="one">
+                                                    </div>
+                                                    <div class="price-wrap-2">
+                                                        <label for="two">$</label>
+                                                        <input id="two">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+<!--                                    <div class="buttons-container filter-block">-->
+<!--                                        <button class="button-arounder">Ֆիլտրել</button>-->
+<!--                                    </div>-->
+<!--                                    <div class="filter-block products">-->
+<!--                                        <h4>Color</h4>-->
+
+<!--                                        <ul class="bycolor variant flexitem">-->
+<!--                                            <li>-->
+<!--                                                <input  type="radio" name="color" id="cogrey">-->
+<!--                                                <label for="cogrey" class="circle"></label>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <input  type="radio" name="color" id="coblue">-->
+<!--                                                <label for="coblue" class="circle"></label>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <input  type="radio" name="color" id="cogreen">-->
+<!--                                                <label for="cogreen" class="circle"></label>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <input  type="radio" name="color" id="cored">-->
+<!--                                                <label for="cored" class="circle"></label>-->
+<!--                                            </li>-->
+<!--                                            <li>-->
+<!--                                                <input  type="radio" name="color" id="colight">-->
+<!--                                                <label for="colight" class="circle"></label>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+
+                                </div>
+                            </div>
+                            <div class="section">
+                                <% if (products.length)  { %>
+                                <div class="row">
+                                    <div class="cat-head">
+<!--                                        <div class="breadcrumb">-->
+<!--                                            <ul class="flexitem">-->
+<!--                                                <li><a href="#">Home</a></li>-->
+<!--                                                <li>Women</li>-->
+<!--                                            </ul>-->
+<!--                                        </div>-->
+<!--                                        <div class="page-title">-->
+<!--                                            <h1>Women</h1>-->
+<!--                                        </div>-->
+<!--                                        <div class="cat-description">-->
+<!--                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias assumenda atque culpa delectus deleniti deserunt ea,-->
+<!--                                                enim exercitationem explicabo facilis fuga laborum laudantium molestiae neque nisi officia omnis pariatur perspiciatis-->
+<!--                                                porro possimus quibusdam quo quod sapiente sunt vero vitae, voluptate. Adipisci dolores itaque iusto nemo sint. Consequatur-->
+<!--                                                cum earum eum fuga hic ipsam iste iure modi porro possimus quisquam recusandae,-->
+<!--                                                reprehenderit rerum tempore tenetur. Aliquid corporis delectus eligendi, nobis placeat quaerat qui repellendus sit.</p>-->
+<!--                                        </div>-->
+                                        <div class="cat-navigation flexitem">
+                                            <div class="item-filter desktop-hide">
+                                                <a href="#" class="filter-trigger label">
+                                                    <i class="ri-menu-2-line ri-2x"></i>
+                                                    <span>Filter</span>
+                                                </a>
+                                            </div>
+                                            <div class="item-sortir">
+                                                <div class="label">
+                                                    <span class="mobile-hide">Տեսակավորել ըստ</span>
+                                                    <div class="desktop-hide">լռելյայն</div>
+                                                    <i class="ri-arrow-down-s-line"></i>
+                                                </div>
+                                                <ul>
+                                                    <li>լռելյայն</li>
+                                                    <li>Ապրանքի անուն</li>
+                                                    <li>Գին</li>
+                                                    <li>Ապրանքանիշ</li>
+                                                </ul>
+                                            </div>
+                                            <div class="item-options">
+                                                <div class="label">
+                                                    <span class="mobile-hide">Ցույց տալ 10-ական մեկ էջում</span>
+                                                    <div class="desktop-hide">10</div>
+                                                    <i class="ri-arrow-down-s-line"></i>
+                                                </div>
+                                                <ul>
+                                                    <li>10</li>
+                                                    <li>20</li>
+                                                    <li>30</li>
+                                                    <li>Բոլորը</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="products main flexwrap" id="products-list">
+                                    <% for (let product of products) { %>
+                                        <div class="item">
+                                            <div class="media">
+                                                <div class="thumbnail object-cover">
+                                                    <a href="/page-offer/<%= product.id %>">
+                                                        <img src="<%= product.image %>" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="hoverable">
+                                                    <ul>
+                                                        <input type="hidden" class="product-id" value="<%= product.id %>"/>
+                                                        <li class="active <%= product.isFavorite ? 'favorite' : ''%>"><div class="circle-for"><i class="ri-heart-line"></i></div></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="discount circle flexcenter"><span><%= product.discount %>%</span></div>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="main-links"><a href="/page-offer/<%= product.id %>" ><%= product.title %></a></h3>
+                                                <div class="rating">
+                                                    <div class="stars"></div>
+                                                    <span class="mini-text">(<%= product.numReviews%>)</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span class="current">$<%= product.price %></span>
+                                                </div>
+                                                <div class="mini-text">
+                                                    <p><%= product.stock %> sold</p>
+                                                    <p>Անվճար առաքում</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="load-more flexcenter ">
+                                    <a href="#" class="secondary-button">Տեսնել Ավելին</a>
+                                </div>
+                                <% } else { %>
+                                    <div class="load-more flexcenter">
+                                        <h3 style="text-align: center; margin-top: 55px">Ոչինչ չի գտնվել</h3>
+                                    </div>
+                                <% } %>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('includes/baners.ejs') %>
+
+    </main>
+    <%- include('includes/footer.ejs') %>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/filtration.js"></script>
+<script>
+    const FtoShow = '.filter';
+    const Fpopup = document.querySelector(FtoShow);
+    const Ftrigger = document.querySelector('.filter-trigger');
+
+    Ftrigger.addEventListener('click', () => {
+        setTimeout(() => {
+            if(!Fpopup.classList.contains('show')) {
+                Fpopup.classList.add('show')
+            }
+        }, 250 )
+    })
+
+    // auto close by click outside .filter
+    document.addEventListener('click', (e) => {
+        const isClosest = e.target.closest(FtoShow);
+        if (!isClosest && Fpopup.classList.contains('show')) {
+            Fpopup.classList.remove('show')
+        }
+    })
+    $("#mySearch").on("input", function() {
+        let filter = $(this).val().toUpperCase();
+        $("#categories-items li").each(function() {
+            let txtValue = $(this).find(".categories-title").text();
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    var lowerSlider = document.querySelector('#lower');
+    var  upperSlider = document.querySelector('#upper');
+
+    document.querySelector('#two').value=upperSlider.value;
+    document.querySelector('#one').value=lowerSlider.value;
+
+    var  lowerVal = parseInt(lowerSlider.value);
+    var upperVal = parseInt(upperSlider.value);
+
+    upperSlider.oninput = function () {
+        lowerVal = parseInt(lowerSlider.value);
+        upperVal = parseInt(upperSlider.value);
+
+        if (upperVal < lowerVal + 4) {
+            lowerSlider.value = upperVal - 4;
+            if (lowerVal == lowerSlider.min) {
+                upperSlider.value = 4;
+            }
+        }
+        document.querySelector('#two').value=this.value
+    };
+
+    lowerSlider.oninput = function () {
+        lowerVal = parseInt(lowerSlider.value);
+        upperVal = parseInt(upperSlider.value);
+        if (lowerVal > upperVal - 4) {
+            upperSlider.value = lowerVal + 4;
+            if (upperVal == upperSlider.max) {
+                lowerSlider.value = parseInt(upperSlider.max) - 4;
+            }
+        }
+        document.querySelector('#one').value=this.value
+    };
+
+
+</script>
+</html>

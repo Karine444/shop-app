@@ -1,0 +1,432 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+<div id="page" class="site page-single">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head flexitem">
+                <div class="logo">
+                    <img src="../assets/logo.png" alt="mega.am">
+                    <a href="/">mega.am</a>
+                </div>
+                <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+
+    <%- include('includes/body_head.ejs') %>
+
+    <main>
+
+        <div class="single-product">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="breadcrumb">
+                        <ul class="flexitem">
+                            <li><a href="/">Գլխավոր էջ</a></li>
+                            <li><a href="#"><%=subcategory.title%></a></li>
+                            <li><%= product.title %></li>
+                        </ul>
+                    </div>
+
+                    <div class="column">
+                        <div class="products one">
+                            <div class="flexwrap">
+                                <div class="row">
+                                    <div class="item is_sticky">
+                                        <% if(product.discount) { %>
+                                            <div class="price">
+                                                <span class="discount"><%= product.discount%>%<br>Զեղչ</span>
+                                            </div>
+                                        <% } %>
+                                        <div class="big-image">
+                                            <div class="big-image-wrapper swiper-wrapper">
+                                                <% if (images.length) { %>
+                                                    <% images.forEach(image => { %>
+                                                        <div class="image-show swiper-slide">
+                                                            <a data-fslightbox href="<%= image.image %>"><img src="../<%= image.image %>" alt=""></a>
+                                                        </div>
+                                                    <% }) %>
+                                                <% } else { %>
+                                                        <div class="image-show swiper-slide">
+                                                            <a data-fslightbox href="<%= product.image %>"><img src="../<%= product.image %>" alt=""></a>
+                                                        </div>
+                                                <% }  %>
+
+                                            </div>
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+
+                                        <div thumbSlider="" class="small-image">
+                                            <ul class="small-image-wrapper flexitem swiper-wrapper">
+                                                <% images.forEach(image => { %>
+                                                    <li class="thumbnail-show swiper-slide">
+                                                        <img src="../<%= image.image %>" alt="">
+                                                    </li>
+                                                <% }) %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <h1><%= product.title %></h1>
+                                        <div class="content">
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <a href="" class="mini-text"><%= commentsCount %>  մեկնաբանում</a>
+                                            </div>
+                                            <div class="stock-sku">
+                                                <span class="available">
+                                                <% if (product.stock > 0) { %>
+                                                    Առկա է
+                                                <% } else { %>
+                                                    Առկա չէ
+                                                <% } %>
+                                                </span>
+                                                <span class="sku mini-text"><%=product.code%></span>
+                                            </div>
+
+                                            <div class="price">
+                                                <span class="current">$<%= changedPrice %></span>
+                                                <% if(product.discount) { %>
+                                                    <span class="normal">$<%= product.price %></span>
+                                                <% } %>
+                                            </div>
+<!--                                            <div class="colors">-->
+<!--                                                <p>Color</p>-->
+<!--                                                <div class="variant">-->
+<!--                                                    <form>-->
+<!--                                                        <p>-->
+<!--                                                            <input type="radio" name="color" id="cogrey">-->
+<!--                                                            <label for="cogrey" class="circle"></label>-->
+<!--                                                        </p>-->
+<!--                                                        <p>-->
+<!--                                                            <input type="radio" name="color" id="coblue">-->
+<!--                                                            <label for="coblue" class="circle"></label>-->
+<!--                                                        </p>-->
+<!--                                                        <p>-->
+<!--                                                            <input type="radio" name="color" id="cogreen">-->
+<!--                                                            <label for="cogreen" class="circle"></label>-->
+<!--                                                        </p>-->
+<!--                                                    </form>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+                                            <div class="stock mini-text" data-stock="<%= product.stock %>">
+                                                <div class="qty">
+                                                    <span>Առկա է:<strong class="qty-available"><%= product.stock %></strong></span>
+                                                    <span>Վաճառվել է:<strong class="qty-sold"><%= product.sold %></strong></span>
+                                                </div>
+                                                <div class="bar">
+                                                    <div class="available"></div>
+                                                </div>
+                                            </div>
+                                            <%
+                                            if (offerEnds.length) { %>
+                                                <div class="offer">
+                                                    <p>Առաջարկը գործում է</p>
+                                                    <input type="hidden" value="<%=product.discount_expired_date%>" class="countdownDate"/>
+                                                    <ul class="flexcenter countdown-timer">
+                                                        <% for (let i=0 ; i<(offerEnds).length; i++) { %>
+                                                        <li class="timer_<%=i%>"><%= offerEnds[i]%></li>
+                                                        <% } %>
+                                                    </ul>
+                                                </div>
+                                            <% } %>
+                                            <% if (product.size !== undefined && product.size.length) { %>
+                                            <div class="sizes">
+                                                <p>Չափս</p>
+                                                <div class="variant">
+                                                    <form>
+                                                        <% product.size.forEach((sizeValue, index) => { %>
+                                                            <p>
+                                                                <% if (index === 0) { %>
+                                                                    <input type="radio" class="size-input" name="color" id="size-<%= sizeValue %>" checked>
+                                                                <% } else { %>
+                                                                    <input type="radio" class="size-input" name="color" id="size-<%= sizeValue %>">
+                                                                <% } %>
+                                                                <label for="size-<%= sizeValue %>" class="circle"><span><%= sizeValue %></span></label>
+                                                            </p>
+                                                        <% }) %>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                            <% } %>
+                                            <div class="actions">
+                                                <div  style="display: flex">
+                                                    <div class="qty-control flexitem">
+                                                        <button class="minus circle">-</button>
+                                                        <input type="text" value="1" class="quantity-input">
+                                                        <button class="plus circle">+</button>
+                                                    </div>
+                                                    <form action="/cart/<%= product.id %>" method="post">
+                                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                        <input type="hidden" name="quantity" value="1" id="quantity">
+                                                        <input type="hidden" name="size" value="<%= typeof product.size !== 'undefined' ? (product.size && product.size.length > 0 ? product.size[0] : '') : '' %>" >
+                                                        <div class="button-cart">
+                                                            <button class="primary-button" style=" font-size: 18px;">Ավելացնել զամբյուղում</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+<!--                                                <div class="qty-control flexitem">-->
+<!--                                                    <button class="minus circle">-</button>-->
+<!--                                                    <input type="text" value="1">-->
+<!--                                                    <button class="plus circle">+</button>-->
+<!--                                                </div>-->
+<!--                                                <div class="button-cart">-->
+<!--                                                    <button class="primary-button">Ավելացնել քարտին</button>-->
+<!--                                                </div>-->
+<!--                                                <div class="wish-share">-->
+<!--                                                    <ul class="flexitem second-links">-->
+<!--                                                        <li><a href="#">-->
+<!--                                                            <span class="icon-large"><i class="ri-heart-line"></i></span>-->
+<!--                                                            <span>Wishlist</span>-->
+<!--                                                        </a></li>-->
+<!--                                                        <li><a href="#">-->
+<!--                                                            <span class="icon-large"><i class="ri-share-line"></i></span>-->
+<!--                                                            <span>Share</span>-->
+<!--                                                        </a></li>-->
+<!--                                                    </ul>-->
+<!--                                                </div>-->
+                                            </div>
+
+                                            <div class="description collapse">
+                                                <div>
+                                                    <li class="has-child expand">
+                                                        <a href="#0" class="icon-small">Տեղեկատվություն</a>
+                                                        <ul class="content">
+                                                            <li><span>Ապրանքանիշ</span><span><%=product.brand%></span></li>
+                                                            <li><span>Սեռ</span><span><%=product.gender%></span></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="has-child">
+                                                        <a href="#0" class="icon-small">Մանրամասներ</a>
+                                                        <div class="content">
+                                                            <p><%=product.description%></p>
+                                                        </div>
+                                                    </li>
+                                                    <li class="has-child">
+                                                        <a href="#0" class="icon-small">Չափսեր</a>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Չափս</th>
+                                                                    <th>Կրծքավանդակ <span class="mini-text">(սմ)</span></th>
+                                                                    <th>Գոտկատեղ <span class="mini-text">(սմ)</span></th>
+                                                                    <th>Ազդր <span class="mini-text">(սմ)</span></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>XS</td>
+                                                                    <td>82,5</td>
+                                                                    <td>62</td>
+                                                                    <td>87,5</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>S</td>
+                                                                    <td>85</td>
+                                                                    <td>63,5</td>
+                                                                    <td>89</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>M</td>
+                                                                    <td>87,5</td>
+                                                                    <td>67,5</td>
+                                                                    <td>93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>L</td>
+                                                                    <td>90</td>
+                                                                    <td>72,5</td>
+                                                                    <td>98</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>XL</td>
+                                                                    <td>93</td>
+                                                                    <td>77,5</td>
+                                                                    <td>103</td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </li>
+                                                    <li class="has-child expand">
+                                                        <a href="#" class="icon-small">
+                                                            Մեկնաբանություններ
+                                                            <span class="mini-text"><%= commentsCount %> </span>
+                                                        </a>
+                                                        <div class="content">
+                                                            <div class="reviews">
+                                                                <h4>Հաճախորդների մեկնաբանություններ</h4>
+                                                                <form action="/get-comment/<%= product.id %>" method="get">
+                                                                    <div class="review-block">
+                                                                        <div class="review-block-head">
+                                                                            <div class="flexitem">
+                                                                                <span class="rate-sum"><%= averageRating.toFixed(1) %></span>
+                                                                                <span><%= commentsCount %> Մեկնաբանություն</span>
+                                                                            </div>
+                                                                            <a href="#review-form" class="secondary-button">Գրել մեկնաբանություն</a>
+                                                                        </div>
+                                                                        <div class="review-block-body">
+                                                                            <ul>
+                                                                                <% comments.forEach(comment => { %>
+                                                                                    <li class="item">
+                                                                                        <input type="hidden" class="comment-rating" value="<%=comment.rating %>">
+                                                                                        <div class="review-form">
+                                                                                            <p class="person">Մեկնաբանություն <%= comment.username %>-ի կոմից</p>
+                                                                                            <div class="mini-text">Մեկնաբանույթյան ամսաթիվը: <%= comment.createdAt.toISOString().split('T')[0] %></div>
+                                                                                        </div>
+                                                                                        <div class="review-rating rating">
+                                                                                            <div class="stars"></div>
+                                                                                        </div>
+                                                                                        <div class="review-text">
+                                                                                            <p><%= comment.description %></p>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                <% }) %>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <div id="review-form" class="review-form">
+                                                                        <h4>Գրել մեկնաբանություն</h4>
+                                                                        <div class="rating">
+                                                                            <p>Դուք բավականաչափ գո՞հ եք։</p>
+                                                                            <div class="rate-this">
+                                                                                <input type="radio" name="rating" id="star5">
+                                                                                <label for="star5"><i class="ri-star-fill"></i></label>
+
+                                                                                <input type="radio" name="rating" id="star4">
+                                                                                <label for="star4"><i class="ri-star-fill"></i></label>
+
+                                                                                <input type="radio" name="rating" id="star3">
+                                                                                <label for="star3"><i class="ri-star-fill"></i></label>
+
+                                                                                <input type="radio" name="rating" id="star2">
+                                                                                <label for="star2"><i class="ri-star-fill"></i></label>
+
+                                                                                <input type="radio" name="rating" id="star1">
+                                                                                <label for="star1"><i class="ri-star-fill"></i></label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <form action="/post-comment/<%= product.id %>" method="post">
+                                                                            <input type="hidden" name="userId" value="<%= user._id %>">
+                                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                                            <input type="hidden" name="rate" value="5" id="comment-rate">
+                                                                            <p>
+                                                                                <label>Անուն</label>
+                                                                                <input type="text" name="username" value="<%=user.username%>">
+                                                                            </p>
+                                                                            <p>
+                                                                                <label>Մեկնաբանություն</label>
+                                                                                <textarea cols="30" rows="10" name="description"></textarea>
+                                                                            </p>
+                                                                            <p>
+                                                                                <button class="primary-button" type="submit">Հաստատել</button>
+                                                                            </p>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="related-products">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="column">
+                        <div class="sectop flexitem">
+                            <h2><span class="circle"></span><span>Նամանատիպ ապրանքներ</span></h2>
+                            <div class="second-links">
+                                <a href="/page-category" class="view-all">
+                                    տեսնել բոլորը
+                                    <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="products main flexwrap">
+                            <% for (let product of relatedProducts) { %>
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="/page-offer/<%= product.id %>">
+                                                <img src="../<%= product.image %>" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <input type="hidden" class="product-id" value="<%= product.id %>"/>
+                                                <li class="active <%= product.isFavorite ? 'favorite' : ''%>"><div class="circle-for"><i class="ri-heart-line"></i></div></li>
+                                            </ul>
+                                        </div>
+                                        <% if(product.discount) { %>
+                                            <div class="discount circle flexcenter"><span><%= product.discount %>%</span></div>
+                                        <% } %>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="/page-offer/<%= product.id %>" ><%= product.title %></a></h3>
+                                        <div class="rating">
+                                            <div class="stars"></div>
+                                            <span class="mini-text">(<%= product.numReviews%>) մեկնաբանություն</span>
+                                        </div>
+                                        <div class="price">
+                                            <span class="current">$<%= product.price %></span>
+                                        </div>
+                                        <div class="mini-text">
+                                            <p><%= product.sold %> Վաճառված</p>
+                                            <p><%= product.stock %> Առկա</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('includes/baners.ejs') %>
+
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/offerTimer.js"></script>
+<script src="/js/rating.js"></script>
+<script src="/js/quantity.js"></script>
+</html>

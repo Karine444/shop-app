@@ -1,0 +1,289 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+    <div id="page" class="site page-single showdpt">
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head flexitem">
+                    <div class="logo">
+                        <img src="../assets/logo.png" alt="mega.am">
+                        <a href="/">MEGA</a>
+                    </div>
+                    <a href="#" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+
+        <%- include('includes/body_head.ejs') %>
+
+        <main>
+            <div class="slider">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="myslider swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="../assets/slider/slider0.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Նորաձեւ կոշիկներ</h4>
+                                            <h2><span>Արի և վերցրու այն:</span><br><span>Բոլորովին նոր կոշիկներ</span></h2>
+                                            <a href="#" class="primary-button">Գնել հիմա</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="../assets/slider/slider1.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Արագ Նորաձեւություն</h4>
+                                            <h2><span>Ընլայնեք ձեր զգեստապահարանը</span><br><span>Շքեղ իրերով</span></h2>
+                                            <a href="#" class="primary-button">Գնել հիմա</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="../assets/slider/slider2.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Արագ առաջարկ</h4>
+                                            <h2><span>Փայտե մինիմալիստական բազմոց</span><br><span>Հավելյալ 50% զեղչ%</span></h2>
+                                            <a href="#" class="primary-button">Գնել հիմա</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="../assets/slider/slider3.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Լավագույն առաջարկներ</h4>
+                                            <h2><span>Տնային մարզումների պարագաներ</span><br><span>անցիր թույլատրելիի սահմանները</span></h2>
+                                            <a href="#" class="primary-button">Գնել հիմա</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="brands">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="item">
+                            <a href="#">
+                                <img src="../assets/brands/zara.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="../assets/brands/samsung.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="../assets/brands/oppo.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="../assets/brands/asus.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="../assets/brands/hurley.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="../assets/brands/dng.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trending">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="sectop flexitem">
+                            <h2><span class="circle"></span><span>Թրենդային ապրանքներ</span></h2>
+                        </div>
+                        <div class="column">
+                            <div class="flexwrap">
+                                <% for (let product of featuredProducts) { %>
+                                    <div class="row products  big">
+                                        <div class="item discount-container">
+                                            <div class="offer">
+                                                <p>Առաջարկը գործում է</p>
+                                                <input type="hidden" value="<%=product.discount_expired_date%>" class="countdownDate"/>
+                                                <ul class="flexcenter countdown-timer">
+                                                    <% for (let i=0 ; i<(product.offerEnds).length; i++) { %>
+                                                        <li class="timer_<%=i%>"><%= product.offerEnds[i]%></li>
+                                                    <% } %>
+                                                </ul>
+                                            </div>
+                                            <div class="media">
+                                                <div class="image">
+                                                    <a href="/page-offer/<%= product.id %>" class="btn">
+                                                        <img src="<%= product.image %>" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="hoverable">
+                                                    <ul>
+                                                        <input type="hidden" class="product-id" value="<%= product.id %>"/>
+                                                        <li class="active <%= product.isFavorite ? 'favorite' : ''%>"><div class="circle-for"><i class="ri-heart-line"></i></div></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="discount circle flexcenter"><span>31%</span></div>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="main-links"><a href="/page-offer/<%= product.id %>" ><%= product.title %></a></h3>
+                                                <div class="price">
+                                                    <span class="current">$<%= product.changedPrice %></span>
+                                                    <span class="normal mini-text">$<%= product.price %></span>
+                                                </div>
+                                                <div class="stock mini-text">
+                                                    <div class="qty">
+                                                        <span>Առկա է:<strong class="qty-available"><%= product.stock %></strong></span>
+                                                        <span>Վաճառված է:<strong class="qty-sold"><%= product.sold %></strong></span>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="available"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+
+                                <div class="row products mini object-cover flexwrap" style="flex: 0 0 63.3333%;">
+                                    <% for (let product of trendingProducts) { %>
+                                        <div class="item" style="width: 50%;">
+                                            <div class="media">
+                                                <div class="thumbnail object-cover">
+                                                    <a href="/page-offer/<%= product.id %>">
+                                                        <img src="<%= product.image %>" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="hoverable">
+                                                    <ul>
+                                                        <input type="hidden" class="product-id" value="<%= product.id %>"/>
+                                                        <li class="active <%= product.isFavorite ? 'favorite' : ''%>"><div class="circle-for"><i class="ri-heart-line"></i></div></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="discount circle flexcenter"><span><%= product.discount %>%</span></div>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="main-links"><a href="/page-offer/<%= product.id %>" ><%= product.title %></a></h3>
+                                                <div class="rating">
+                                                    <div class="stars"></div>
+                                                    <span class="mini-text">(<%= product.numReviews%>)</span>
+                                                </div>
+                                                <div class="price">
+                                                    <span class="current">$<%= product.price %></span>
+                                                </div>
+                                                <div class="mini-text">
+                                                    <p><%= product.stock %> sold</p>
+                                                    <p>Անվճար առաքում</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="column">
+                            <div class="sectop flexitem">
+                                <h2><span class="circle"></span><span>Նորություններ</span></h2>
+                                <div class="second-links">
+                                    <a href="/page-category" class="view-all">
+                                        Տեսնել բորոլը
+                                        <i class="ri-arrow-right-line"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="products main flexwrap">
+                                <% for (let product of prods) { %>
+                                    <div class="item" style="width: 50%;">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="/page-offer/<%= product.id %>">
+                                                    <img src="<%= product.image %>" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <input type="hidden" class="product-id" value="<%= product.id %>"/>
+                                                    <li class="active <%= product.isFavorite ? 'favorite' : ''%>"><div class="circle-for"><i class="ri-heart-line"></i></div></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span><%= product.discount %>%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="/page-offer/<%= product.id %>" ><%= product.title %></a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(<%= product.numReviews%>)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">$<%= product.price %></span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p><%= product.stock %> sold</p>
+                                                <p>Անվճար առաքում</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    <%- include('includes/baners.ejs') %>
+
+        </main>
+
+    <%- include('includes/footer.ejs') %>
+
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!--<script src="jquery-3.7.1.min.js"></script>-->
+<script src="/js/script.js"></script>
+<script src="/js/offerTimer.js"></script>
+</html>
